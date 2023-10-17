@@ -12,6 +12,116 @@
 ![topo](https://github.com/Ansell10/readme/assets/114125933/f9feeb42-f692-49b2-9796-3fae2a119ff4)
 
 ## Nomor 1-8
+### Yudhistira
+```
+#!/bin/bash
+
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install bind9 -y
+
+
+echo 'zone "arjuna.B16.com" {
+type master;
+also-notify {192.186.2.3; };
+allow-transfer {192.186.2.3; };
+file "/etc/bind/arjuna/arjuna.B16.com" ;
+};
+
+zone "abimanyu.B16.com" {
+type master;
+also-notify {192.186.2.3; };
+allow-transfer {192.186.2.3; };
+file "/etc/bind/abimanyu/abimanyu.B16.com" ;
+};
+
+zone "1.186.192.in-addr.arpa" {
+type master;
+also-notify {192.186.2.3; };
+allow-transfer {192.186.2.3; };
+file "/etc/bind/abimanyu/1.186.192.in-addr.arpa" ;
+};' > /etc/bind/named.conf.local
+
+mkdir /etc/bind/arjuna
+mkdir /etc/bind/abimanyu
+
+cp /etc/bind/db.local /etc/bind/arjuna/arjuna.B16.com
+cp /etc/bind/db.local /etc/bind/abimanyu/abimanyu.B16.com
+cp /etc/bind/db.local /etc/bind/abimanyu/1.186.192.in-addr.arpa
+
+echo '$TTL 604800
+@       IN      SOA     arjuna.B16.com. root.arjuna.B16.com. (
+                   2023101001 ; Serial
+                   604800   ; Refresh
+                   86400    ; Retry
+                   2419200  ; Expire
+                   604800 ) ; Minimum TTL
+
+@       IN      NS      arjuna.B16.com.
+@       IN      A       192.186.2.4
+www     IN      CNAME   arjuna.B16.com.
+@       IN      AAAA    ::1' > /etc/bind/arjuna/arjuna.B16.com
+
+echo '$TTL 604800
+@       IN      SOA     abimanyu.B16.com. root.abimanyu.B16.com. (
+                   2023101001  ; Serial
+                   604800   ; Refresh
+                   86400    ; Retry
+                   2419200  ; Expire
+                   604800 ) ; Minimum TTL
+
+@               IN      NS      abimanyu.B16.com.
+@               IN      A       192.186.1.4
+www             IN      CNAME   abimanyu.B16.com.
+parikesit       IN      A       192.186.1.4
+baratayuda      IN      NS      ns1
+@               IN      AAAA    ::1' > /etc/bind/abimanyu/abimanyu.B16.com
+
+
+echo '$TTL 604800
+@       IN      SOA     abimanyu.B16.com. root.abimanyu.B16.com. (
+2023101001 ; Serial
+                   604800   ; Refresh
+                   86400    ; Retry
+                   2419200  ; Expire
+                   604800 ) ; Minimum TTL
+
+1.186.192.in-addr.arpa. IN      NS      abimanyu.B16.com.
+4                       IN      PTR     abimanyu.B16.com.
+' > /etc/bind/abimanyu/1.186.192.in-addr.arpa
+
+echo 'options {
+        directory "/var/cache/bind";
+
+        // If there is a firewall between you and nameservers you want
+        // to talk to, you may need to fix the firewall to allow multiple
+        // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+        // If your ISP provided one or more IP addresses for stable
+        // nameservers, you probably want to use them as forwarders.
+        // Uncomment the following block, and insert the addresses replacing
+        // the all-0'"'"'s placeholder.
+
+        // forwarders {
+        //      0.0.0.0;
+        // };
+
+        //========================================================================
+        // If BIND logs error messages about the root key being expired,
+        // you will need to update your keys.  See https://www.isc.org/bind-keys
+        //========================================================================
+        //dnssec-validation auto;
+        allow-query{any;};
+
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};' > /etc/bind/named.conf.options
+
+
+service bind9 restart
+```
+
+### Werkudara
 ```
 #!/bin/bash
 echo nameserver 192.168.122.1 > /etc/resolv.conf
