@@ -11,6 +11,92 @@
 ## Topologi
 ![topo](https://github.com/Ansell10/readme/assets/114125933/f9feeb42-f692-49b2-9796-3fae2a119ff4)
 
+## Config 
+- **Router**
+  ```
+  auto eth0
+  iface eth0 inet dhcp
+
+  auto eth1
+  iface eth1 inet static
+          address 192.186.1.1
+          netmask 255.255.255.0
+
+  auto eth2
+  iface eth2 inet static
+          address 192.186.2.1
+          netmask 255.255.255.0
+  ```
+- **NakulaClient**
+  ```
+  auto eth0
+  iface eth0 inet static
+          address 192.186.1.2
+          netmask 255.255.255.0
+          gateway 192.186.1.1
+  ```
+
+- **SadewaClient**
+  ```
+  auto eth0
+  iface eth0 inet static
+          address 192.186.1.3
+          netmask 255.255.255.0
+          gateway 192.186.1.1
+  ```
+- **AbimanyuWebServer**
+  ```
+  auto eth0
+  iface eth0 inet static
+          address 192.186.1.4
+          netmask 255.255.255.0
+          gateway 192.186.1.1
+  ```
+
+- **PrabukusumaWebServer**
+  ```
+  auto eth0
+  iface eth0 inet static
+          address 192.186.1.5
+          netmask 255.255.255.0
+          gateway 192.186.1.1
+  ```
+- **WisanggeniWebServer**
+  ```
+  auto eth0
+  iface eth0 inet static
+          address 192.186.1.6
+          netmask 255.255.255.0
+          gateway 192.186.1.1
+  ```
+  
+- **YudhistiraDNSMaster**
+  ```
+  auto eth0
+  iface eth0 inet static
+          address 192.186.2.2
+          netmask 255.255.255.0
+          gateway 192.186.2.1
+  ```
+
+- **WerkudaraDNSSlave**
+  ```
+  auto eth0
+  iface eth0 inet static
+          address 192.186.2.3
+          netmask 255.255.255.0
+          gateway 192.186.2.1
+  ```
+
+- **ArjunaLoadBalancer**
+  ```
+  auto eth0
+  iface eth0 inet static
+          address 192.186.2.4
+          netmask 255.255.255.0
+          gateway 192.186.2.1#
+
+  
 ## Nomor 1-8
 ### Yudhistira
 ```
